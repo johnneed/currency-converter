@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     control: {flex: 1, flexDirection: 'row', justifyContent: 'center'},
     countryName: {textAlign: 'center', height: 20},
     label: {flex: 1, height: 60, alignItems: 'stretch', justifyContent: 'center'},
-    input: {height: 40, width: 60, borderColor: 'gray', borderWidth: 1, textAlign: 'center'}
+    input: {height: 40, width: 100, borderColor: 'gray', borderWidth: 1, textAlign: 'center'}
 });
 
 const formatNumber = (text) => {
@@ -50,7 +50,7 @@ export default class App extends React.Component {
         this.convert = this.convert.bind(this);
     }
 
-    state = {rates: null, fromTo: 'from', to: 'CA', from: 'US', modalVisible: false};
+    state = {amount: '1.00', rates: null, fromTo: 'from', to: 'CA', from: 'US', modalVisible: false};
 
     componentDidMount() {
         fetch(api)
@@ -90,7 +90,7 @@ export default class App extends React.Component {
 
         return (
             <View style={styles.container}>
-                <View style={{height: 210, backgroundColor: '#EEE'}}>
+                <View style={{height: 280, backgroundColor: '#EEE'}}>
                     <Text style={{fontSize: 30, lineHeight: 40, textAlign: 'center'}}>{'Currency Converter'}</Text>
                     <View style={styles.label}>
                         <Text style={styles.countryName}>{fromCountry || ''}</Text>
@@ -123,6 +123,28 @@ export default class App extends React.Component {
                             </TouchableHighlight>
                         </View>
                         <Text style={styles.countryName}>{toCountry || ''}</Text>
+                    </View>
+                    <View style={[styles.control, {marginTop: 10}]}>
+                        <TouchableHighlight
+                            onPress={() => this.setState({to: 'JP'})}
+                            style={[styles.button, {width: 40}]}>
+                            <Text style={styles.buttonText}>{'‎¥‎'}</Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            onPress={() => this.setState({to: 'CN'})}
+                            style={[styles.button, {width: 40}]}>
+                            <Text style={styles.buttonText}>{'‎¥/元'}</Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            onPress={() => this.setState({to: 'IN'})}
+                            style={[styles.button, {width: 40}]}>
+                            <Text style={styles.buttonText}>{'‎₹'}</Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            onPress={() => this.setState({to: 'FR'})}
+                            style={[styles.button, {width: 40}]}>
+                            <Text style={styles.buttonText}>{'€'}</Text>
+                        </TouchableHighlight>
                     </View>
                 </View>
                 <Modal

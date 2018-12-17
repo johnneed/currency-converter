@@ -85,8 +85,8 @@ export default class App extends React.Component {
     render() {
         const fromCurrency = ((countries[this.state.from] || {}).currency || {}).code;
         const toCurrency = ((countries[this.state.to] || {}).currency || {}).code;
-        const fromCountry = (countries[this.state.from] || {}).name;
-        const toCountry = (countries[this.state.to] || {}).name;
+        const fromCountry = this.state.amount === 1 ?  ((countries[this.state.from] || {}).currency || {}).name :  ((countries[this.state.from] || {}).currency || {}).namePlural;
+        const toCountry =((countries[this.state.to] || {}).currency || {}).namePlural;
 
         return (
             <View style={styles.container}>
@@ -133,7 +133,7 @@ export default class App extends React.Component {
                         <TouchableHighlight
                             onPress={() => this.setState({to: 'CN'})}
                             style={[styles.button, {width: 40}]}>
-                            <Text style={styles.buttonText}>{'‎¥/元'}</Text>
+                            <Text style={styles.buttonText}>{'CN‎¥'}</Text>
                         </TouchableHighlight>
                         <TouchableHighlight
                             onPress={() => this.setState({to: 'IN'})}

@@ -76,6 +76,7 @@ export default class App extends React.Component {
         const fromCurrency = ((countries[from] || {}).currency || {}).code;
         const toCurrency = ((countries[to] || {}).currency || {}).code;
         const _amount = parseFloat(amount);
+        // Base currency is the Euro. 
         const fromRate = rates && rates[fromCurrency];
         const toRate = rates && rates[toCurrency];
 

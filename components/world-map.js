@@ -1,13 +1,22 @@
 import React, {Component} from 'react';
 import {MapView} from 'expo';
 import PropTypes from 'prop-types';
-import {View, StyleSheet, TouchableOpacity,Text} from 'react-native';
-
-const apiURL = 'http://api.geonames.org/findNearbyJSON?lat={lat}&lng={long}&username=johnneed';
+import {View, StyleSheet} from 'react-native';
+import * as turf from '@turf/helpers';
+import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
+import countries from '../data/countries.geo.json';
+// const apiURL = 'http://api.geonames.org/findNearbyJSON?lat={lat}&lng={long}&username=johnneed';
 
 const findCountry = (location) => {
-    const url = apiURL.replace('{lat}', location.latitude).replace('{long}', location.longitude);
-    return fetch(url).then(response => response.json());
+    const _location = turf.point([location.longitude, location.latitude]);
+    const country = countries.features.find((f) => {
+        const feature = turf.feature(f.geometry);
+        return booleanPointInPolygon(_location, feature);
+    });
+    return ((country || {}).properties || {}).iso_a2 || null;
+ 
+    // const url = apiURL.replace('{lat}', location.latitude).replace('{long}', location.longitude);
+    // return fetch(url).then(response => response.json());
 };
 
 const styles = StyleSheet.create(
@@ -30,11 +39,11 @@ export class WorldMap extends Component {
 
     onMapTap(data) {
         const location = data.nativeEvent.coordinate;
-        findCountry(location).then(_data => {
-            const countryCode = _data.geonames[0].countryCode;
+        const countryCode = findCountry(location);
+        if(countryCode) {
             this.props.onSelect(countryCode);
-        });
-        this.props.close();
+            this.props.close();
+        }
     }
 
     render() {

@@ -8,7 +8,7 @@
       "ios",
       "android"
     ],
-    "githubUrl": "https://github.com/johnneed/GreenUpVermont",
+    "githubUrl": "https://github.com/johnneed/currency-converter.git",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,13 +21,13 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "**/*"
+      "assets/images/*",
+      "assets/fonts/*"
     ],
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "edu.essexstem.app",
-      "config": {
-      },
+      "config": {},
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "We use your location to identify your local currency"
       }
@@ -53,9 +53,6 @@
       "barStyle": "dark-content",
       "backgroundColor": "#EEEEEE"
     },
-    "assetBundlePatterns": [
-      "assets/images/*",
-      "assets/fonts/*"
-    ]
+    "description": "A demo app for Essex STEM that converts currencies."
   }
 }

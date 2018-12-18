@@ -7,6 +7,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@turf/boolean-point-in-polygon": "^6.0.1",
     "@turf/turf": "^5.1.6",
     "expo": "^31.0.2",
     "ramda": "^0.26.1",

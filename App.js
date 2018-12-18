@@ -96,6 +96,7 @@ export default class App extends React.Component {
                         <Text style={styles.countryName}>{fromCountry || ''}</Text>
                         <View style={styles.control}>
                             <TextInput
+                                keyboardType = {'decimal-pad'}
                                 style={styles.input}
                                 onChangeText={(text) => this.setState({amount: formatNumber(text)})}
                                 value={this.state.amount}
